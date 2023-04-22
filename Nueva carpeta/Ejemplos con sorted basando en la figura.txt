@@ -1,0 +1,16 @@
+|unaSorted bloque circ1 circ2 aux|
+aux:= ''.
+bloque:=[:x :y| x radio >= y radio].
+unaSorted := SortedCollection sortBlock:bloque.
+
+circ1:=Circulo new.
+circ1 nombreFigura:'Circunferencia1'; radio:4.
+
+circ2:=Circulo new.
+circ2 nombreFigura:'Circunferencia2'; radio:10.
+
+unaSorted add:circ1.
+unaSorted add:circ2.
+
+unaSorted do:[:x| aux:= aux, x asString, String cr.].
+Transcript show:'Datos de la sorted:', String cr, aux. 

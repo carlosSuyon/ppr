@@ -1,0 +1,4 @@
+|alu1|
+alu1:= Alumno new.
+alu1 dni:234567;nombre: 'Maria';telefono:145567890 ;legajo: 1234; promedio:8.
+Transcript show: 'Los datos completos son:', alu1 asString.

@@ -1,0 +1,10 @@
+|cir1 triang1|
+cir1:=Circulo new.
+cir1 nombreFigura:'Circunferencia1'; radio:4.
+
+triang1:=Triangulo new.
+triang1 nombreFigura:'Triangulo1';lado1:5;lado2:6;lado3:2.
+
+Transcript show:' El perimetro del triangulo es:', triang1 calcularPerimetro asString,String cr. 
+
+Transcript show:' El perimetro del circulo es:', cir1 calcularPerimetro asString,String cr. 

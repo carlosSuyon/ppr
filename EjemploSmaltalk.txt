@@ -1,0 +1,116 @@
+presentoTrabajo:unAutor
+	"comment stating purpose of message"
+
+	| aux autorBuscado msj|
+	
+	autorBuscado:=unAutor .
+	
+	aux:= trabajos detect: [ :x|x autor = autorBuscado]ifNone:[  aux:=nil].
+		(aux isNotNil )
+			ifTrue: [  msj :='Se encontro el autor']
+			ifFalse:[msj:='No se encontro  el autor'].
+			^msj
+			
+addTrabajo:unTrabajo
+	"comment stating purpose of message"
+	|aux valor msj|
+	valor:=unTrabajo titulo .
+	aux :=trabajos detect:[:x|x titulo = valor ]ifNone:[aux:=nil].
+	
+	(aux isNotNil )
+		ifTrue: [ trabajos add: unTrabajo .
+						msj:='Se agrego el trabajo' ]
+		ifFalse:[
+				msj :='No se agrego el trabajo']
+			.
+				
+	^aux 
+informarCategoria
+	" devuelve la descripción de la categoría de acuerdo a
+	su número"
+
+	| aux |
+	
+	(categoria  =1 )
+			ifTrue: [ aux:='-Docente' ]
+			ifFalse:[
+					(categoria =2)
+						ifTrue: [ 
+									aux:='Alumno'
+							 ]
+						ifFalse:[
+									aux:='Investigador'
+							]
+				].
+			^aux
+
+
+String
+	"-"
+
+	 ^super String , 'Cantidad de Tablas: ',cantTablas asString ,
+				'Cantidad de Figuras : ',cantFiguras asString .
+				
+	
+addHito:unHito
+	"comment stating purpose of message"
+
+	(unHito isKindOf: Hito)
+		ifTrue: [ hitos add: unHito ]
+		ifFalse:[self error: 'No es un hito'].
+		
+
+costo
+
+	| aux |
+	aux:=0.
+	 ( super cantHoras  >0) & (self precioAdicionalHora >0)
+			ifTrue: [ 
+						aux:=  (super cantHoras * self precioAdicionalHora ) +super precioHora 
+				 ]
+			ifFalse:[ self error: 'Operacion invalida '].
+	
+	 ^aux
+
+estaActivo:unId
+"Retorna true si el objeto con el id especificado como colaborador externo al método, está en
+estado activo. Retorna false en cualquier otro caso"
+|aux booleano|
+
+booleano := false.
+aux := objetos detect:[:x|x id  = unId ]ifNone:[aux:=nil].
+	
+	(aux isNotNil )
+		ifTrue: [ booleano := true  ]
+^ booleano
+
+tomarComando:unValor para:id
+"Permite tomar un valor recibido de uno de los sensores de la vivienda y enviarlo al objeto
+inteligente correspondiente según su id."
+	objetos do:[:x |  ( x id = id) ifTrue: [x tomarComando:unValor]]
+
+
+listarAlarmaEn:hrDesde y:hrHasta
+"Retorna un listado ordenado cronológicamente con todas las alarmas que se registraron en un
+determinado lapso, comprendido entre una hora desde (hrDesde) y una hora hasta (hrHasta)"
+	|list|
+	
+	objetos do:[: x | x alarmas se]
+	
+do: [:x | x ]
+select : [:x | x ]
+
+Evalúa unBloque para cada elemento de la colección.
+Retorna una nueva colección conteniendo todos aquellos elementos que
+hicieron que unBloque evaluara en true
+
+detect : [:x | x ] ifNone:[  aux:=nil].
+		(aux isNotNil )
+			ifTrue: [  msj :=' ']
+			ifFalse:[msj:=' '].
+			^msj
+			
+Evalúa unBloque para cada elemento de la colección.
+Retorna el primer elemento que haga que unBloque evalúe en true. Si
+ningún elemento cumple la condición, bloqueExcepcion es evaluado
+
